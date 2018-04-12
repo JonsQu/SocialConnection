@@ -12,6 +12,7 @@ public class MainActivity extends BaseActivity {
     }
 
     public void signIn(View view) {
+
     }
 
     public void login(View view) {
