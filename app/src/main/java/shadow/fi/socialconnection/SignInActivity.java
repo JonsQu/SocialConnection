@@ -10,7 +10,5 @@ public class SignInActivity extends BaseActivity{
         setContentView(R.layout.activity_signin);
     }
 
-    public void saveUserInfo(View view) {
 
-    }
 }

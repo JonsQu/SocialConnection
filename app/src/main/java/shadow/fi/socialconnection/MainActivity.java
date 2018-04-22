@@ -12,11 +12,4 @@ public class MainActivity extends BaseActivity {
         setContentView(R.layout.activity_main);
     }
 
-    public void signIn(View view) {
-        Intent signIn = new Intent(this, SignInActivity.class);
-        startActivity(signIn);
-    }
-
-    public void login(View view) {
-    }
 }

@@ -6,21 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity"
     android:orientation="vertical">
-    <Button
-        android:id="@+id/signIn"
-        android:text="Sign in"
-        android:onClick="signIn"
-        android:enabled="true"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1" />
-    <Button
-        android:id="@+id/login"
-        android:text="Login"
-        android:onClick="login"
-        android:enabled="false"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1" />
+
 
 </LinearLayout>
