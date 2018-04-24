@@ -17,6 +17,7 @@ import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
+import com.facebook.HttpMethod;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
@@ -42,9 +43,9 @@ public class MainActivity extends BaseActivity {
 
         loginButton = (LoginButton) findViewById(R.id.login_button);
         loginButton.setReadPermissions(Arrays.asList(EMAIL));
-        // If you are using in a fragment, call loginButton.setFragment(this);
 
-        // Callback registration
+
+
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
@@ -52,8 +53,6 @@ public class MainActivity extends BaseActivity {
 
                 String accessToken = loginResult.getAccessToken().getToken();
 
-                // save accessToken to SharedPreference
-                //prefUtil.saveAccessToken(accessToken);
 
                 GraphRequest request = GraphRequest.newMeRequest(
                         loginResult.getAccessToken(),
@@ -71,6 +70,17 @@ public class MainActivity extends BaseActivity {
 
                             }
                         });
+                        new GraphRequest(
+                                AccessToken.getCurrentAccessToken(),
+                                "/page-id/feed",
+                                null,
+                                HttpMethod.GET,
+                                new GraphRequest.Callback() {
+                                    public void onCompleted(GraphResponse response) {
+                                        /* handle the result */
+                                    }
+                                }
+                        ).executeAsync();
 
                 Bundle parameters = new Bundle();
                 parameters.putString("fields", "id,first_name,last_name,email,gender");
@@ -80,19 +90,18 @@ public class MainActivity extends BaseActivity {
 
             @Override
             public void onCancel() {
-                // App code
+
             }
 
             @Override
             public void onError(FacebookException exception) {
-                // App code
+
             }
         });
 
 
         AccessToken accessToken = AccessToken.getCurrentAccessToken();
-        //boolean isLoggedIn = accessToken == null;
-        //boolean isExpired = accessToken.isExpired();
+
 
 
         LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList("public_profile"));
@@ -129,10 +138,7 @@ public class MainActivity extends BaseActivity {
                 bundle.putString("gender", object.getString("gender"));
 
 
-            /*prefUtil.saveFacebookUserInfo(object.getString("first_name"),
-                    object.getString("last_name"),object.getString("email"),
-                    object.getString("gender"), profile_pic.toString());
-            */
+
         } catch (Exception e) {
             Log.d("MainActivity", "BUNDLE Exception : "+e.toString());
         }
